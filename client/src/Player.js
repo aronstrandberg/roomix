@@ -7,6 +7,7 @@ import PlayerTrack from './PlayerTrack'
 import PlayerArtists from './PlayerArtists'
 import PlayerControls from './PlayerControls'
 import PlayerBackgroundAlbumArt from './PlayerBackgroundAlbumArt'
+import RadarGraph from './RadarGraph'
 
 class Player extends Component {
   current_track() {
@@ -38,7 +39,9 @@ class Player extends Component {
         </div>
 
         <PlayerBackgroundAlbumArt image_url={image.url} />
-      </div>
+        <RadarGraph />
+
+        </div>
     );
   }
 }
