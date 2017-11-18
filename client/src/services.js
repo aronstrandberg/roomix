@@ -1,5 +1,10 @@
 const BASE_URL = 'http://localhost:3000';
 
+function getRooms() {
+  const url = BASE_URL + '/rooms';
+  return api(url)
+}
+
 function createRoom(name) {
   const url = BASE_URL + '/create';
   return api(url, {
@@ -46,6 +51,7 @@ function api(endpoint, options = {}) {
 
 export default api;
 export {
+  getRooms,
   createRoom,
-  vote
+  vote,
 };
