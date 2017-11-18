@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 
 
 const app = express();
+app.use(bodyParser.json());
+
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
@@ -35,27 +37,49 @@ app.get('/test', (req,res) => {
     updateRoom(3, 1,1,1);
 });
 
-app.post('/test', (req,res) => {
-    console.log("WOHOH",  req.body);
+app.post('/vote', function(request,response) {
+    if(request.body)
+        response.sendStatus(vote(request.body));
+    else
+        response.sendStatus(400);
 });
 
-app.post('/create', (req,res) => {
-    res.send("200", "HEJSAN");
-    console.log(req); 
+app.post('/create', function(request,response){
+    if(request.body) { 
+        updateRoom(request.body.name);
+        response.sendStatus(200);
+    } else {
+        response.sendStatus(400); 
+    }
 });
 
 const step = 0.01;
 const defaultValue = 0.5;
+
+function vote(body) {
+    let roomId = body.name;
+    let dance = body.dance;
+    let valens = body.valens;
+    let instr = body.instr;
+    if(roomId && dance && valens && instr) {
+        updateRoom(roomId,Number(dance),Number(valens),Number(instr));
+        return 200;
+    }
+    return 400;
+
+}
 
 function updateRoom(roomId, incDance, incValens, incInstr) {
   let oldValue = rooms.find({id: roomId}).toArray((err, res) => {
     if(err)
         throw err;
     if(res[0]) {
+        if(isNaN(incDance) || isNaN(incValens) || isNaN(incInstr))
+            return;
         rooms.update({id: roomId}, {$set: 
-            {dance: (res[0].dance + step * incDance),
-            valens: (res[0].valens + step * incValens),
-            instr: (res[0].instr + step * incInstr)
+            {dance: Math.max(0,Math.min(1, (res[0].dance + step * incDance))),
+            valens: (Math.max(0,Math.min(1, res[0].valens + step * incValens))),
+            instr: (Math.max(0,Math.min(1, res[0].instr + step * incInstr)))
             }});
     } else {
         rooms.insert({id: roomId, 
