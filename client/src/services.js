@@ -10,16 +10,18 @@ function createRoom(name) {
   });
 }
 
-function vote(name, dance, valance, instr) {
+function vote(name, vote) {
     const url = BASE_URL + '/vote';
+    const votes = Object.assign({
+      name: name,
+      dance: 0,
+      valens: 0,
+      instr: 0
+    }, vote)
+    console.log(votes)
     return api(url, {
         method: 'POST',
-        body: {
-            name: name,
-            dance: dance,
-            valens: valance,
-            instr: instr
-        }
+        body: votes
     });
 }
 

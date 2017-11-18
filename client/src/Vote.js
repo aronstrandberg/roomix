@@ -4,33 +4,24 @@ import { vote } from './services'
 import './Vote.css'
 
 class Vote extends Component {
-    onClickValence = (value) => {
-        if(value){
-            vote(this.props.name, 0, 1, 0)
-        }
-        else{
-            vote(this.props.name, 0, -1, 0)
-
-        }
+  increaseValence = () => {
+    vote(this.props.name, { valens: 1 })
   }
-    onClickDance = (value) => {
-        if(value){
-            vote(this.props.name, 1, 0, 0)
-        }
-        else{
-            vote(this.props.name, -1, 0, 0)
-
-        }
-    }
-    onClickInstr = (value) => {
-        if(value){
-            vote(this.props.name, 0, 0, 1)
-        }
-        else{
-            vote(this.props.name, 0, 0, 1)
-
-        }
-    }
+  decreaseValence = () => {
+    vote(this.props.name, { valens: -1 })
+  }
+  increaseDance = () => {
+    vote(this.props.name, { dance: 1 })
+  }
+  decreaseDance = () => {
+    vote(this.props.name, { dance: -1 })
+  }
+  increaseInstr = () => {
+    vote(this.props.name, { instr: 1 })
+  }
+  decreaseInstr = () => {
+    vote(this.props.name, { instr: -1 })
+  }
 
   render() {
     return (
@@ -38,10 +29,10 @@ class Vote extends Component {
             <div className="single-attribute">
                 <h3 data-tip="valence">Valence</h3>
                 <h3>
-                    <a className="vote-button" data-tip="Increase" onClick={this.onClickValence(true)}>
+                    <a className="vote-button" data-tip="Increase" onClick={this.increaseValence}>
                         <i className="fa fa-plus-square"></i>
                     </a>
-                    <a className="vote-button" data-tip="Decrease" onClick={this.onClickValence(false)}>
+                    <a className="vote-button" data-tip="Decrease" onClick={this.decreaseValence}>
                         <i className="fa fa-minus-square"></i>
                     </a>
                 </h3>
@@ -49,10 +40,10 @@ class Vote extends Component {
             <div className="single-attribute">
                 <h3 data-tip="Danceability">Danceability</h3>
                 <h3>
-                    <a className="vote-button" onClick={this.onClickDance(true)}>
+                    <a className="vote-button" onClick={this.increaseDance}>
                         <i className="fa fa-plus-square"></i>
                     </a>
-                    <a className="vote-button" onClick={this.onClickDance(false)}>
+                    <a className="vote-button" onClick={this.decreaseDance}>
                         <i className="fa fa-minus-square"></i>
                     </a>
                 </h3>
@@ -60,17 +51,16 @@ class Vote extends Component {
             <div className="single-attribute">
                 <h3 data-tip="Instrumentalness">Instrumentalness</h3>
                 <h3>
-                    <a className="vote-button" onClick={this.onClickInstr(true)}>
+                    <a className="vote-button" onClick={this.increaseInstr}>
                         <i className="fa fa-plus-square"></i>
                     </a>
-                    <a className="vote-button" onClick={this.onClickInstr(false)}>
+                    <a className="vote-button" onClick={this.decreaseInstr}>
                         <i className="fa fa-minus-square"></i>
                     </a>
                 </h3>
             </div>
-        <ReactTooltip place="top" type="dark" effect="solid"/>
+          <ReactTooltip place="top" type="dark" effect="solid"/>
         </div>
-
     );
   }
 }

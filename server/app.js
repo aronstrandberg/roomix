@@ -54,10 +54,13 @@ app.get('/getroom', function(request, response) {
 });
 
 app.post('/vote', function(request, response) {
-    if(request.body)
-        response.sendStatus(vote(request.body));
-    else
-        response.sendStatus(400);
+    if(request.body) {
+        let status = vote(request.body);
+        response.status(200).send(JSON.stringify({ body: request.body }));
+    }
+    else {
+        response.status(400).send(JSON.stringify({}));
+    }
 });
 
 app.post('/create', function(request, response) {
