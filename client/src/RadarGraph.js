@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class RadarGraph extends Component {
   render() {
     return (
-      <div class="radarstyle">
+      <div className="radarstyle">
         <Radar
           width={500}
           height={500}
