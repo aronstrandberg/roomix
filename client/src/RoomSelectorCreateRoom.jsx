@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import RoomSelectorCreateRoomButton from './RoomSelectorCreateRoomButton'
 import RoomSelectorCreateRoomInput from './RoomSelectorCreateRoomInput'
 
+import { createRoom } from './services'
+
 class RoomSelectorCreateRoom extends Component {
   state = {
     creating: false,
@@ -24,7 +26,9 @@ class RoomSelectorCreateRoom extends Component {
   }
 
   submit = () => {
-    console.log("näääääääääru")
+    createRoom(this.state.value).then(room => {
+      console.log(room);
+    })
   }
 
   render() {
