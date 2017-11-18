@@ -74,8 +74,9 @@ function updateRoom(roomId, incDance, incValens, incInstr) {
     if(err)
         throw err;
     if(res[0]) {
-        if(isNaN(incDance) || isNaN(incValens) || isNaN(incInstr))
-            return;
+        if(isNaN(incDance) || isNaN(incValens) || isNaN(incInstr) || !(res[0].dance && res[0].valens && res[0].instr))
+        return;
+        
         rooms.update({id: roomId}, {$set: 
             {dance: Math.max(0,Math.min(1, (res[0].dance + step * incDance))),
             valens: (Math.max(0,Math.min(1, res[0].valens + step * incValens))),
