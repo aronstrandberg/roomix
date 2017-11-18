@@ -37,9 +37,9 @@ app.get('/getroom', function(request, response) {
     return;
   }
 
-  let roomId = request.body.name;
+  let roomName = request.body.name;
 
-  let stuff = rooms.find({id: roomId}).toArray((err, res) => {
+  let stuff = rooms.find({name: roomName}).toArray((err, res) => {
     if (err) {
       response.status(400).send("Failed to find room " + err);
       return;
@@ -76,33 +76,33 @@ const step = 0.01;
 const defaultValue = 0.5;
 
 function vote(body) {
-    let roomId = body.name;
+    let roomName = body.name;
     let dance = body.dance;
     let valens = body.valens;
     let instr = body.instr;
-    if(roomId && dance && valens && instr) {
-        updateRoom(roomId,Number(dance),Number(valens),Number(instr));
+    if(roomName && dance && valens && instr) {
+        updateRoom(roomName,Number(dance),Number(valens),Number(instr));
         return 200;
     }
     return 400;
 
 }
 
-function updateRoom(roomId, incDance, incValens, incInstr) {
-  let oldValue = rooms.find({id: roomId}).toArray((err, res) => {
+function updateRoom(roomName, incDance, incValens, incInstr) {
+  let oldValue = rooms.find({name: roomName}).toArray((err, res) => {
     if(err)
         throw err;
     if(res[0]) {
         if(isNaN(incDance) || isNaN(incValens) || isNaN(incInstr))
         return;
 
-        rooms.update({id: roomId}, {$set:
+        rooms.update({name: roomName}, {$set:
             {dance: Math.max(0,Math.min(1, (res[0].dance + step * incDance))),
             valens: (Math.max(0,Math.min(1, res[0].valens + step * incValens))),
             instr: (Math.max(0,Math.min(1, res[0].instr + step * incInstr)))
             }});
     } else {
-        rooms.insert({id: roomId,
+        rooms.insert({name: roomName,
             dance: defaultValue,
             valens: defaultValue,
             instr: defaultValue
