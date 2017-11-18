@@ -2,21 +2,18 @@ import React, { Component } from 'react';
 import {getId} from './helpers';
 
 class PlayerArtists extends Component {
-  renderArtists () {
-    return this.props.artists.map((artist) => {
-      const uri = artist.uri;
-      const url = "https://open.spotify.com/artist/" + getId(uri);
-      return (
-        <div className="player player-artist" key={artist.uri}>
-          <a href={url}>
-            <li>{artist.name}</li>
-          </a>
-        </div>
-      );
-    });
-  }
+  artists = () => this.props.artists.map(a => a.name).join(", ")
+
   render () {
-    return (<ul className="player player-artists">{this.renderArtists()}</ul>);
+    const uri = this.props.artists[0].uri;
+    const url = "https://open.spotify.com/artist/" + getId(uri);
+    return (
+      <div className="player player-artists">
+        <a href={url}>
+          <p>{ this.artists() }</p>
+        </a>
+      </div>
+    );
   }
 }
 
