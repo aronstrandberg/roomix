@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Player from './Player'
 import RoomSelector from './RoomSelector'
+import PlayerSearch from './PlayerSearch'
 
 class HomePage extends Component {
   state = {
@@ -16,6 +17,8 @@ class HomePage extends Component {
     const { state } = this.props;
     const rooms = [
       { id: '123', name: 'Kung-Fu Kenny' },
+      { id: '124', name: 'Cornrow Kenny' },
+      { id: '125', name: 'Lil Chano from 79th' },
     ];
     return (
       <div className="homepage">
