@@ -24,11 +24,6 @@ class HomePage extends Component {
 
   render() {
     const { state } = this.props;
-    const rooms = [
-      { name: 'Kung-Fu Kenny' },
-      { name: 'Cornrow Kenny' },
-      { name: 'Lil Chano from 79th' },
-    ];
     return (
       <div className="homepage">
         { this.state.roomName &&
@@ -36,7 +31,7 @@ class HomePage extends Component {
         }
         <AdminView state={this.props.state} admin={this.state.admin} />
         { this.state.roomName && <RegularView admin={this.state.admin} /> }
-        { !this.state.roomName && <RoomSelector rooms={rooms} setRoom={this.setRoom} onCreateRoom={this.onCreateRoom} />}
+        { !this.state.roomName && <RoomSelector setRoom={this.setRoom} onCreateRoom={this.onCreateRoom} />}
       </div>
     );
   }
