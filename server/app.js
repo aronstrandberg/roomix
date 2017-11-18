@@ -23,7 +23,7 @@ var db = MongoClient.connect('mongodb://127.0.0.1:27017/potatochip', (err, db) =
 
 
 const hostname = '127.0.0.1';
-const port = 3000;
+const port = 3001;
 
 app.listen(port, () => console.log("Starting"));
 
@@ -31,10 +31,26 @@ app.get('/', (req,res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/test', (req,res) => {
-    updateRoom(1,1,1,1);
-    updateRoom(2,-1,-1,-1);
-    updateRoom(3, 1,1,1);
+app.get('/getroom', function(request, response) {
+  if (!request.body) {
+    response.status(400).send("Missing body");
+    return;
+  }
+
+  let roomId = request.body.name;
+
+  let stuff = rooms.find({id: roomId}).toArray((err, res) => {
+    if (err) {
+      response.status(400).send("Failed to find room " + err);
+      return;
+    }
+    if (res[0]) {
+      let d = "{dance: " + res[0].dance + ", valens: " + res[0].valens + ", instr: " + res[0].instr + "}";
+      response.status(200).send(d);
+      return;
+    }
+    response.status(400).send("Failed to find room");
+  });
 });
 
 app.post('/vote', function(request,response) {
@@ -45,11 +61,11 @@ app.post('/vote', function(request,response) {
 });
 
 app.post('/create', function(request,response){
-    if(request.body) { 
+    if(request.body) {
         updateRoom(request.body.name);
         response.sendStatus(200);
     } else {
-        response.sendStatus(400); 
+        response.sendStatus(400);
     }
 });
 
@@ -74,19 +90,19 @@ function updateRoom(roomId, incDance, incValens, incInstr) {
     if(err)
         throw err;
     if(res[0]) {
-        if(isNaN(incDance) || isNaN(incValens) || isNaN(incInstr) || !(res[0].dance && res[0].valens && res[0].instr))
+        if(isNaN(incDance) || isNaN(incValens) || isNaN(incInstr))
         return;
-        
-        rooms.update({id: roomId}, {$set: 
+
+        rooms.update({id: roomId}, {$set:
             {dance: Math.max(0,Math.min(1, (res[0].dance + step * incDance))),
             valens: (Math.max(0,Math.min(1, res[0].valens + step * incValens))),
             instr: (Math.max(0,Math.min(1, res[0].instr + step * incInstr)))
             }});
     } else {
-        rooms.insert({id: roomId, 
+        rooms.insert({id: roomId,
             dance: defaultValue,
             valens: defaultValue,
-            instr: defaultValue 
+            instr: defaultValue
         });
     }
   });
