@@ -65,7 +65,7 @@ app.get('/getroom', function(request, response) {
 
 app.post('/vote', function(request, response) {
     if(request.body) {
-        let status = vote(request.body);
+        vote(request.body);
         response.status(200).send(JSON.stringify({ body: request.body }));
     }
     else {
@@ -90,12 +90,8 @@ function vote(body) {
     let dance = body.dance;
     let valens = body.valens;
     let instr = body.instr;
-    if(roomName && dance && valens && instr) {
-        updateRoom(roomName,Number(dance),Number(valens),Number(instr));
-        return 200;
-    }
-    return 400;
 
+    updateRoom(roomName,Number(dance),Number(valens),Number(instr));
 }
 
 function updateRoom(roomName, incDance, incValens, incInstr) {

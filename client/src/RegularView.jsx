@@ -10,7 +10,7 @@ class RegularView extends Component {
     return (
       <div className="regular-view">
         <RadarGraph />
-        <Vote />
+        <Vote name={this.props.name} />
       </div>
     )
   }

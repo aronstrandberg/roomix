@@ -30,7 +30,7 @@ class HomePage extends Component {
           <h2>Current room: { this.state.roomName }</h2>
         }
         <AdminView state={this.props.state} admin={this.state.admin} />
-        { this.state.roomName && <RegularView admin={this.state.admin} /> }
+        { this.state.roomName && <RegularView admin={this.state.admin} name={this.state.roomName} /> }
         { !this.state.roomName && <RoomSelector setRoom={this.setRoom} onCreateRoom={this.onCreateRoom} />}
       </div>
     );
