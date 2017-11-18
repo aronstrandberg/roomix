@@ -31,7 +31,7 @@ class HomePage extends Component {
     return (
       <div className="homepage">
         <PlayerSearch onSelect={this.playTrack} />
-        { /*this.state.roomId && <Player state={state} /> */}
+        { this.state.roomId && <Player state={state} /> }
         { !this.state.roomId && <RoomSelector rooms={rooms} setRoom={this.setRoom} />}
       </div>
     );
