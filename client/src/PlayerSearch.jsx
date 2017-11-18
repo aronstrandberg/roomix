@@ -8,7 +8,8 @@ import './PlayerSearch.css'
 class PlayerSearch extends Component {
   state = {
     value: '',
-    tracks: []
+    tracks: [],
+    displayResults: true
   }
 
   onChange = (event) => {
@@ -23,13 +24,24 @@ class PlayerSearch extends Component {
     this.search();
   }
 
+
+  onSelect = (uri) => {
+    this.props.onSelect(uri);
+    this.setDisplayResults(false);
+  }
+
+  setDisplayResults = (value) => {
+    this.setState({
+      displayResults: value
+    });
+  }
+
   search = () => {
-    console.log("searching!")
     window.App.searchTracks(this.state.value).then(results => {
       const tracks = results.tracks.items;
-      console.log(tracks)
       this.setState({
-        tracks: tracks
+        tracks: tracks,
+        displayResults: true
       })
     })
   }
@@ -41,7 +53,9 @@ class PlayerSearch extends Component {
           <PlayerSearchInput value={this.state.value} onChange={this.onChange} />
           {/*<PlayerSearchButton onClick={this.search} />*/}
         </form>
-        <PlayerSearchResults tracks={this.state.tracks} />
+        { this.state.displayResults &&
+          <PlayerSearchResults tracks={this.state.tracks} onClick={this.onSelect} />
+        }
       </div>
     )
   }

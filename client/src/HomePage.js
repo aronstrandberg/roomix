@@ -6,13 +6,21 @@ import PlayerSearch from './PlayerSearch'
 
 class HomePage extends Component {
   state = {
-    roomId: null
+    roomId: null,
+    currentSongUri: ''
   }
   setRoom = (id) => {
     this.setState({
       roomId: id
     })
   }
+
+  playTrack = (uri) => {
+    window.App.playTrack(uri).then(result => {
+      console.log(result)
+    })
+  }
+
   render() {
     const { state } = this.props;
     const rooms = [
@@ -22,7 +30,8 @@ class HomePage extends Component {
     ];
     return (
       <div className="homepage">
-        { this.state.roomId && <Player state={state} /> }
+        <PlayerSearch onSelect={this.playTrack} />
+        { /*this.state.roomId && <Player state={state} /> */}
         { !this.state.roomId && <RoomSelector rooms={rooms} setRoom={this.setRoom} />}
       </div>
     );

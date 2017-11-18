@@ -34,6 +34,7 @@
   width: 100%;
   background-color: #0000;
   border: none;
+  outline: none;
 }
 
 .player-search-input:active {
@@ -49,4 +50,8 @@
 .player-search-results-track {
   padding: 10px 0 10px 32px;
   border-bottom: 1px solid #333;
+}
+
+.player-search-results-track:hover {
+  cursor: pointer;
 }
