@@ -7,17 +7,17 @@ import PlayerSearch from './PlayerSearch'
 
 class HomePage extends Component {
   state = {
-    roomName: null,
+    room: {},
     currentSongUri: ''
   }
   setRoom = (room) => {
     this.setState({
-      roomName: room.name
+      room: room
     })
   }
-  onCreateRoom = (room) => {
+  onCreateRoom = (name) => {
     this.setState({
-      roomName: room.name,
+      room: { name },
       admin: true
     })
   }
@@ -27,11 +27,11 @@ class HomePage extends Component {
     return (
       <div className="homepage">
         { this.state.roomName &&
-          <h2>Current room: { this.state.roomName }</h2>
+          <h2>Current room: { this.state.room.name }</h2>
         }
         <AdminView state={this.props.state} admin={this.state.admin} />
-        { this.state.roomName && <RegularView admin={this.state.admin} name={this.state.roomName} /> }
-        { !this.state.roomName && <RoomSelector setRoom={this.setRoom} onCreateRoom={this.onCreateRoom} />}
+        { this.state.room.name && <RegularView admin={this.state.admin} room={this.state.room} onVote={this.setRoom} /> }
+        { !this.state.room.name && <RoomSelector setRoom={this.setRoom} onCreateRoom={this.onCreateRoom} />}
       </div>
     );
   }

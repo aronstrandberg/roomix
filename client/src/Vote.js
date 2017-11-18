@@ -5,22 +5,34 @@ import './Vote.css'
 
 class Vote extends Component {
   increaseValence = () => {
-    vote(this.props.name, { valens: 1 })
+    vote(this.props.name, { valens: 1 }).then(result => {
+      this.props.onVote(result)
+    })
   }
   decreaseValence = () => {
-    vote(this.props.name, { valens: -1 })
+    vote(this.props.name, { valens: -1 }).then(result => {
+      this.props.onVote(result)
+    })
   }
   increaseDance = () => {
-    vote(this.props.name, { dance: 1 })
+    vote(this.props.name, { dance: 1 }).then(result => {
+      this.props.onVote(result)
+    })
   }
   decreaseDance = () => {
-    vote(this.props.name, { dance: -1 })
+    vote(this.props.name, { dance: -1 }).then(result => {
+      this.props.onVote(result)
+    })
   }
   increaseInstr = () => {
-    vote(this.props.name, { instr: 1 })
+    vote(this.props.name, { instr: 1 }).then(result => {
+      this.props.onVote(result)
+    })
   }
   decreaseInstr = () => {
-    vote(this.props.name, { instr: -1 })
+    vote(this.props.name, { instr: -1 }).then(result => {
+      this.props.onVote(result)
+    })
   }
 
   render() {

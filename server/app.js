@@ -70,7 +70,9 @@ app.get('/getroom', function(request, response) {
 app.post('/vote', function(request, response) {
     if(request.body) {
         vote(request.body);
-        response.status(200).send(JSON.stringify({ body: request.body }));
+        rooms.findOne({name: request.body.name}, (err, res) => {
+            response.status(200).send(JSON.stringify(res));
+        })
     }
     else {
         response.status(400).send(JSON.stringify({}));
@@ -80,7 +82,7 @@ app.post('/vote', function(request, response) {
 app.post('/create', function(request, response) {
     if(request.body) {
         updateRoom(request.body.name);
-        response.status(200).send(JSON.stringify({ name: request.body.name }));
+        response.status(200).send(JSON.stringify({ room: res }));
     } else {
         response.status(400).send(JSON.stringify({}));
     }
@@ -106,11 +108,14 @@ function updateRoom(roomName, incDance, incValens, incInstr) {
         if(isNaN(incDance) || isNaN(incValens) || isNaN(incInstr))
         return;
 
-        rooms.update({name: roomName}, {$set:
-            {dance: Math.max(0,Math.min(1, (res[0].dance + step * incDance))),
-            valens: (Math.max(0,Math.min(1, res[0].valens + step * incValens))),
-            instr: (Math.max(0,Math.min(1, res[0].instr + step * incInstr)))
-            }});
+        rooms.findOneAndUpdate(
+            {name: roomName},
+            {$set: {
+                dance: Math.max(0,Math.min(1, (res[0].dance + step * incDance))),
+                valens: (Math.max(0,Math.min(1, res[0].valens + step * incValens))),
+                instr: (Math.max(0,Math.min(1, res[0].instr + step * incInstr)))
+            }}
+        );
     } else {
         rooms.insert({name: roomName,
             dance: defaultValue,

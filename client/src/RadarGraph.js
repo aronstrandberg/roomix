@@ -29,9 +29,9 @@ class RadarGraph extends Component {
                 key: 'roomName',
                 label: 'Music Attributes',
                 values: {
-                  valence: 0.8,
-                  danceability: 0.4,
-                  instrumentalness: 0.3,
+                  valence: this.props.room.valens,
+                  danceability: this.props.room.dance,
+                  instrumentalness: this.props.room.instr,
                 },
               },
             ],
