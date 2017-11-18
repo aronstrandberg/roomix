@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip' // npm install react-tooltip
 import './Vote.css'
 
-class Vote extends Component { 
+class Vote extends Component {
     onClickValence = () => {
     console.log("Valence")
-  };
+  }
     onClickDance = () => {
-        console.log("Dance")  
-    };
+        console.log("Dance")
+    }
     onClickInstr = () => {
-        console.log("Instr") 
-    };
+        console.log("Instr")
+    }
 
   render() {
     return (
@@ -31,7 +31,7 @@ class Vote extends Component {
                 <h3 data-tip="Danceability">Danceability</h3>
                 <h3>
                     <a className="vote-button" data-tip="Increase" onClick={this.onClickDance}>
-                        <i className="fa fa-plus-square"></i>                    
+                        <i className="fa fa-plus-square"></i>
                     </a>
                     <a className="vote-button" data-tip="Decrease" onClick={this.onClickDance}>
                         <i className="fa fa-minus-square"></i>
@@ -51,7 +51,7 @@ class Vote extends Component {
             </div>
         <ReactTooltip place="top" type="dark" effect="solid"/>
         </div>
-        
+
     );
   }
 }

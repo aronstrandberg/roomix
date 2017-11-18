@@ -27,7 +27,7 @@ class RoomSelectorCreateRoom extends Component {
 
   submit = () => {
     createRoom(this.state.value).then(room => {
-      console.log(room);
+      this.props.onCreateRoom(room);
     })
   }
 

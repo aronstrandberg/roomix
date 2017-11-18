@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Room extends Component {
   onClick = () => {
-    this.props.setRoom(this.props.room.id);
+    this.props.setRoom(this.props.room);
   }
   render() {
     const { room } = this.props;

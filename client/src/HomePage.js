@@ -1,38 +1,42 @@
 import React, { Component } from 'react';
 
-import Player from './Player'
+import AdminView from './AdminView'
+import RegularView from './RegularView'
 import RoomSelector from './RoomSelector'
 import PlayerSearch from './PlayerSearch'
 
 class HomePage extends Component {
   state = {
-    roomId: null,
+    roomName: null,
     currentSongUri: ''
   }
-  setRoom = (id) => {
+  setRoom = (room) => {
     this.setState({
-      roomId: id
+      roomName: room.name
     })
   }
-
-  playTrack = (uri) => {
-    window.App.playTrack(uri).then(result => {
-      console.log(result)
+  onCreateRoom = (room) => {
+    this.setState({
+      roomName: room.name,
+      admin: true
     })
   }
 
   render() {
     const { state } = this.props;
     const rooms = [
-      { id: '123', name: 'Kung-Fu Kenny' },
-      { id: '124', name: 'Cornrow Kenny' },
-      { id: '125', name: 'Lil Chano from 79th' },
+      { name: 'Kung-Fu Kenny' },
+      { name: 'Cornrow Kenny' },
+      { name: 'Lil Chano from 79th' },
     ];
     return (
       <div className="homepage">
-        <PlayerSearch onSelect={this.playTrack} />
-        { /*this.state.roomId && <Player state={state} /> */}
-        { !this.state.roomId && <RoomSelector rooms={rooms} setRoom={this.setRoom} />}
+        { this.state.roomName &&
+          <h2>Current room: { this.state.roomName }</h2>
+        }
+        <AdminView state={this.props.state} admin={this.state.admin} />
+        { this.state.roomName && <RegularView admin={this.state.admin} /> }
+        { !this.state.roomName && <RoomSelector rooms={rooms} setRoom={this.setRoom} onCreateRoom={this.onCreateRoom} />}
       </div>
     );
   }

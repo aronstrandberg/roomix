@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import HomePage from './HomePage';
+import './App.css'
 
 class ConnectPlayer extends Component {
   listenForFocusOnWebPlayer() {

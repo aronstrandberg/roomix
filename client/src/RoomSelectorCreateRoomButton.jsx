@@ -4,7 +4,7 @@ class RoomSelectorCreateRoomButton extends Component {
   render() {
     const { onClick } = this.props;
     return (
-      <button className="player player-room-selector-create-room-button btn btn-lg btn-primary" onClick={onClick}>
+      <button className="room-selector-create-room-button btn btn-lg btn-primary" onClick={onClick}>
         Create Room
       </button>
     );

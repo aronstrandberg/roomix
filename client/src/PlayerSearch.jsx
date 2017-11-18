@@ -4,6 +4,8 @@ import PlayerSearchInput from './PlayerSearchInput'
 import PlayerSearchResults from './PlayerSearchResults'
 import './PlayerSearch.css'
 
+import { playTrack } from './helpers'
+
 class PlayerSearch extends Component {
   state = {
     value: '',
@@ -21,9 +23,8 @@ class PlayerSearch extends Component {
     this.search();
   }
 
-
   onSelect = (uri) => {
-    this.props.onSelect(uri);
+    playTrack(uri);
     this.setDisplayResults(false);
   }
 
