@@ -2,7 +2,7 @@ const http = require('http');
 var MongoClient = require('mongodb').MongoClient;
 
 var rooms;
-var db = MongoClient.connect('mongodb://127.0.0.1:27017/chip', (err, db) => {
+var db = MongoClient.connect('mongodb://127.0.0.1:27017/potatochip', (err, db) => {
     if(err)
         throw err;
     console.log("Connected to mongo");
@@ -20,4 +20,15 @@ const server = http.createServer((req, res) => {
 
 server.listen(port, hostname, () => {
     console.log(" WE ARE RUNNING " );
+    updateTrait("1", "dance", 1)
 });
+
+
+
+const step = 0.01
+
+function updateTrait(roomId, trait, inc) {
+  console.log(rooms)
+  let oldValue = rooms.find({id: 1})[0].trait
+  rooms.update({id: roomId}, {$set: {trait: oldValue + step * inc}})
+}
