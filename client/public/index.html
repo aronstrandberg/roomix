@@ -10,6 +10,13 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+
+    <link rel="stylesheet" href="%PUBLIC_URL%/reset.min.css" />
+    <link rel="stylesheet" href="https://sp-bootstrap.global.ssl.fastly.net/8.0.0/sp-bootstrap.min.css" />
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <link rel="stylesheet" href="%PUBLIC_URL%/Player.css" />
+
+
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -25,7 +32,22 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <div id="root"></div>
+
+    <header>
+      <h1>Veil Parade 💨🐻</h1>
+    </header>
+    <main id="root" class="container-fluid container-player">
+      <div class="screen screen-loading">
+        <div class="icon grid-loading-icon">
+          <span class="visually-hidden">Loading</span>
+        </div>
+        <span class="visually-hidden">Loading Player</span>
+      </div>
+    </main>
+
+
+
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -36,5 +58,9 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script src="%PUBLIC_URL%/js/App.js"></script>
+    <script src="%PUBLIC_URL%/js/Auth.js"></script>
+    <script src="%PUBLIC_URL%/js/WebPlaybackSDK.js"></script>
   </body>
 </html>
