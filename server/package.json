@@ -1,0 +1,22 @@
+{
+  "name": "potato-server",
+  "version": "1.0.0",
+  "description": "potatochip server backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aronstrandberg/potato-chips.git"
+  },
+  "author": "team potatochip",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aronstrandberg/potato-chips/issues"
+  },
+  "homepage": "https://github.com/aronstrandberg/potato-chips#readme",
+  "dependencies": {
+    "mongodb": "^2.2.33"
+  }
+}
