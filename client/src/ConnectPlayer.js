@@ -17,9 +17,9 @@ class ConnectPlayer extends Component {
 
     // Poll status every 0.1 seconds
     // This is just to improve the UI for the progress bar
-    setInterval(() => {
-      window.App.WebPlaybackSDK.getCurrentState().then(stateHandlerCallback);
-    }, 100);
+    // setInterval(() => {
+    //   window.App.WebPlaybackSDK.getCurrentState().then(stateHandlerCallback);
+    // }, 100);
   }
   waitingToStart() {
     let player_name = window.App.WebPlaybackSDK._options.name;

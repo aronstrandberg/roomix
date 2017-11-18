@@ -7,6 +7,7 @@ import PlayerTrack from './PlayerTrack'
 import PlayerArtists from './PlayerArtists'
 import PlayerControls from './PlayerControls'
 import PlayerBackgroundAlbumArt from './PlayerBackgroundAlbumArt'
+import PlayerSearch from './PlayerSearch'
 import RadarGraph from './RadarGraph'
 
 class Player extends Component {
@@ -22,7 +23,9 @@ class Player extends Component {
       <div className="screen screen-player">
         <div className="player">
           <div className="row">
-            {/*<PlayerSearch />*/}
+            <div className="col-sm-12">
+              <PlayerSearch />
+            </div>
           </div>
           <div className="row">
             <div className="col-sm-3">
