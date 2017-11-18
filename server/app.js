@@ -10,6 +10,10 @@ app.use(bodyParser.json());
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
+app.use((req,res,next) => {
+    console.log(req.method, req.url, req.body);
+    next();
+});
 var MongoClient = require('mongodb').MongoClient;
 
 var rooms;
@@ -25,7 +29,7 @@ var db = MongoClient.connect('mongodb://127.0.0.1:27017/potatochip', (err, db) =
 const hostname = '127.0.0.1';
 const port = 3001;
 
-app.listen(port, () => console.log("Starting"));
+app.listen(port, () => console.log("Starting server.."));
 
 app.get('/', (req,res) => {
     res.sendFile(__dirname + '/index.html');
