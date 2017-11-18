@@ -31,6 +31,16 @@ app.get('/', (req,res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/rooms', function (request, response) {
+    rooms.find().toArray((err, res) => {
+        if (err) {
+            response.status(400).send(JSON.stringify({ error: err }));
+        } else {
+            response.status(200).send(JSON.stringify({ rooms: res }));
+        }
+    });
+});
+
 app.get('/getroom', function(request, response) {
   if (!request.body) {
     response.status(400).send("Missing body");
