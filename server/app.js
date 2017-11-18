@@ -53,19 +53,19 @@ app.get('/getroom', function(request, response) {
   });
 });
 
-app.post('/vote', function(request,response) {
+app.post('/vote', function(request, response) {
     if(request.body)
         response.sendStatus(vote(request.body));
     else
         response.sendStatus(400);
 });
 
-app.post('/create', function(request,response){
+app.post('/create', function(request, response) {
     if(request.body) {
         updateRoom(request.body.name);
-        response.sendStatus(200);
+        response.status(200).send(JSON.stringify({ name: request.body.name }));
     } else {
-        response.sendStatus(400);
+        response.status(400).send(JSON.stringify({}));
     }
 });
 
