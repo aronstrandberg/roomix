@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import HomePage from './HomePage';
+
 class ConnectPlayer extends Component {
   listenForFocusOnWebPlayer() {
-    // let this = this;
     let stateHandlerCallback = (state) => {
       this.stateHandler(state);
     };
@@ -34,12 +35,11 @@ class ConnectPlayer extends Component {
     );
   }
   stateHandler(state) {
-    console.log("statehandler")
     if (state === null) {
       ReactDOM.render(this.waitingToStart(), document.getElementById('root'));
     } else {
       ReactDOM.render(
-        <Player state={state} />,
+        <HomePage state={state} />,
         document.getElementById('root')
       );
     }

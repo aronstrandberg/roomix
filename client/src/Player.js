@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 
+import PlayerAlbumArt from './PlayerAlbumArt'
+import PlayerAlbumName from './PlayerAlbumName'
+import PlayerProgress from './PlayerProgress'
+import PlayerTrack from './PlayerTrack'
+import PlayerArtists from './PlayerArtists'
+import PlayerControls from './PlayerControls'
+import PlayerBackgroundAlbumArt from './PlayerBackgroundAlbumArt'
+
 class Player extends Component {
   current_track() {
     return this.props.state.track_window.current_track;

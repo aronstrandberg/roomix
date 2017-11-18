@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { Authorize, ConnectPlayer, PlayerError } from './Player'
+import Authorize from './Authorize';
+import ConnectPlayer from './ConnectPlayer';
+import PlayerError from './PlayerError';
 
 // import registerServiceWorker from './registerServiceWorker';
 
