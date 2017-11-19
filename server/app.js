@@ -4,7 +4,7 @@ const express = require('express', '4.16.2');
 const bodyParser = require('body-parser');
 
 const app = express();
-var server = require('http').createServer(app);  
+var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
 app.use(bodyParser.json());
@@ -58,13 +58,10 @@ app.get('/rooms', function (request, response) {
     });
 });
 
-app.get('/getroom', function(request, response) {
-  if (!request.body) {
-    response.status(400).send("Missing body");
-    return;
-  }
+app.get('/rooms/:name', function(request, response) {
+  let roomName = request.params.name;
 
-  let roomName = request.body.name;
+  console.log("Fetching room: ", roomName)
 
   let stuff = rooms.find({name: roomName}).toArray((err, res) => {
     if (err) {
@@ -73,7 +70,7 @@ app.get('/getroom', function(request, response) {
     }
     if (res[0]) {
       let d = "{dance: " + res[0].dance + ", valens: " + res[0].valens + ", instr: " + res[0].instr + "}";
-      response.status(200).send(d);
+      response.status(200).send(res[0]);
       return;
     }
     response.status(400).send("Failed to find room");
@@ -96,7 +93,7 @@ app.post('/vote', function(request, response) {
 app.post('/create', function(request, response) {
     if(request.body) {
         updateRoom(request.body.name);
-        response.status(200).send(JSON.stringify({ room: request.body }));
+        response.status(200).send(JSON.stringify({ name: request.body.name }));
     } else {
         response.status(400).send(JSON.stringify({}));
     }

@@ -32,7 +32,7 @@ class Player extends Component {
               <PlayerAlbumName album={album} />
             </div>
             <div className="col-sm-9">
-              <PlayerProgress state={this.props.state} showPosition={true} showDuration={true} />
+              <PlayerProgress state={this.props.state} showPosition={true} showDuration={true} onTrackNearingEnd={this.props.onTrackNearingEnd} />
               <PlayerTrack track={track} />
               <PlayerArtists artists={track.artists} />
               <PlayerControls state={this.props.state} />

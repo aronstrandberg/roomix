@@ -5,6 +5,11 @@ function getRooms() {
   return api(url)
 }
 
+function getRoom(name) {
+  const url = BASE_URL + '/rooms/' + name;
+  return api(url);
+}
+
 function createRoom(name) {
   const url = BASE_URL + '/create';
   return api(url, {
@@ -52,6 +57,7 @@ function api(endpoint, options = {}) {
 export default api;
 export {
   getRooms,
+  getRoom,
   createRoom,
   vote,
 };

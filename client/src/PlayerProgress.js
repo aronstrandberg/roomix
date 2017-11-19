@@ -22,6 +22,14 @@ class PlayerProgress extends Component {
       return null;
     }
   }
+  timeLeft = () => {
+    return this.props.state.duration - this.props.state.position
+  }
+  componentDidUpdate = () => {
+    if (this.timeLeft() > 10) {
+      this.props.onTrackNearingEnd()
+    }
+  }
   render () {
     let progress_perc    = (this.props.state.position / this.props.state.duration) * 100;
     let styles           = {'width': progress_perc + '%'};

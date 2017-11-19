@@ -12,7 +12,7 @@ class HomePage extends Component {
     currentSongUri: '',
     endpoint: 'http://127.0.0.1:3001'
   }
-  
+
   componentDidMount = () => {
     const socket = socketIOClient(this.state.endpoint);
     socket.on('voteupdates', (data) => {
@@ -28,9 +28,9 @@ class HomePage extends Component {
       room: room
     })
   }
-  onCreateRoom = (name) => {
+  onCreateRoom = (room) => {
     this.setState({
-      room: { name },
+      room: room,
       admin: true
     })
   }
@@ -42,7 +42,7 @@ class HomePage extends Component {
         { this.state.roomName &&
           <h2>Current room: { this.state.room.name }</h2>
         }
-        <AdminView state={this.props.state} admin={this.state.admin}/>
+        <AdminView state={this.props.state} admin={this.state.admin} room={this.state.room} />
         { this.state.room.name && <RegularView admin={this.state.admin} room={this.state.room} onVote={this.setRoom} playerState={this.props.state} /> }
         { !this.state.room.name && <RoomSelector setRoom={this.setRoom} onCreateRoom={this.onCreateRoom} />}
       </div>
