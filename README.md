@@ -4,7 +4,7 @@ Project for the Spotify Dev X 2017 hackathon. Vote on the mood in a playlist. Bu
 
 ### Authors
 
-@aronstrandberg / Aron Strandberg
-@erichall / Eric Hallström
-@laceskull / Zak Cook
-@solroosen / Sofie Roos
+[@aronstrandberg](http://github.com/aronstrandberg) / Aron Strandberg  
+[@erichall](http://github.com/erichall) / Eric Hallström  
+[@laceskull](http://github.com/laceskull) / Zak Cook  
+[@solroosen](http://github.com/solroosen) / Sofie Roos  
