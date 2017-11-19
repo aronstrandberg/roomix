@@ -3,8 +3,10 @@ const fs = require('fs');
 const express = require('express', '4.16.2');
 const bodyParser = require('body-parser');
 
-
 const app = express();
+var server = require('http').createServer(app);  
+var io = require('socket.io')(server);
+
 app.use(bodyParser.json());
 
 app.engine('html', require('ejs').renderFile);
@@ -29,7 +31,18 @@ var db = MongoClient.connect('mongodb://127.0.0.1:27017/potatochip', (err, db) =
 const hostname = '127.0.0.1';
 const port = 3001;
 
-app.listen(port, () => console.log("Starting server.."));
+//app.listen(port, () => console.log("Starting server.."));
+server.listen(port);
+
+io.on('connection', socket => {
+    console.log('new socket created', socket.id);
+    //socket.emit('vote', {hej: 'world'});
+});
+
+io.on('vote', socket => {
+    console.log("votings", socket);
+});
+
 
 app.get('/', (req,res) => {
     res.sendFile(__dirname + '/index.html');
@@ -71,7 +84,8 @@ app.post('/vote', function(request, response) {
     if(request.body) {
         vote(request.body);
         rooms.findOne({name: request.body.name}, (err, res) => {
-            response.status(200).send(JSON.stringify(res));
+                io.sockets.emit('voteupdates', JSON.stringify(res));
+                response.status(200).send(JSON.stringify(res));
         })
     }
     else {

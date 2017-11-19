@@ -4,12 +4,25 @@ import AdminView from './AdminView'
 import RegularView from './RegularView'
 import RoomSelector from './RoomSelector'
 import PlayerSearch from './PlayerSearch'
+import socketIOClient from "socket.io-client";
 
 class HomePage extends Component {
   state = {
     room: {},
-    currentSongUri: ''
+    currentSongUri: '',
+    endpoint: 'http://127.0.0.1:3001'
   }
+  
+  componentDidMount = () => {
+    const socket = socketIOClient(this.state.endpoint);
+    socket.on('voteupdates', (data) => {
+        var room = JSON.parse(data);
+        if(room.name === this.state.room.name){
+            this.setRoom(room)
+        }
+    })
+  }
+
   setRoom = (room) => {
     this.setState({
       room: room
