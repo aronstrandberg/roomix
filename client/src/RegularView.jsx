@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import RadarGraph from './RadarGraph'
 import Vote from './Vote'
 
-import './Regularview.css'
+import './fuckyoujövlahelvete.css'
 
 class RegularView extends Component {
   render() {
