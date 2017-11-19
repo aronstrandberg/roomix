@@ -19,7 +19,7 @@ App.sendToLogin = () => {
   // Your Spotify Developer Application
   // Get at https://beta.developer.spotify.com/dashboard/
   let client_id    = "4a8547c6dce7463bb18403b6e1d91567";
-  let redirect_uri = "http://localhost:3000";
+  let redirect_uri = window.location.href;
 
   // You don't need to update these.
   let scopes = "streaming user-read-birthdate " +

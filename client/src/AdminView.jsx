@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Player from './Player'
+import Authorize from './Authorize'
 
 class AdminView extends Component {
   render() {

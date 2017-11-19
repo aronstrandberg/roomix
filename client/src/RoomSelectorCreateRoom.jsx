@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import RoomSelectorCreateRoomButton from './RoomSelectorCreateRoomButton'
 import RoomSelectorCreateRoomInput from './RoomSelectorCreateRoomInput'
-
+import Authorize from './Authorize';
 import { createRoom } from './services'
 
 class RoomSelectorCreateRoom extends Component {
@@ -30,8 +30,12 @@ class RoomSelectorCreateRoom extends Component {
       this.props.onCreateRoom(room);
     })
   }
-
+    
+  authorized = () => {
+    return !!window.App.isAccessToken();
+  }  
   render() {
+    const isAuthorized = this.authorized();
     return (
       <div className="room-selector-create-room">
         {
@@ -40,9 +44,16 @@ class RoomSelectorCreateRoom extends Component {
         }
         {
           this.state.creating && (
+            <div>
+            {!isAuthorized && 
+                <Authorize />
+            } 
+            { isAuthorized &&
             <form onSubmit={this.onSubmit}>
               <RoomSelectorCreateRoomInput onChange={this.onChange} />
             </form>
+            }
+            </div>
           )
         }
       </div>
