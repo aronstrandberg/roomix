@@ -42,10 +42,9 @@ function api(endpoint, options = {}) {
 
   const request = new Request(endpoint, options);
 
-  console.log(request);
 
   return fetch(request).then((response) => {
-    return response.json();
+    return response.json()
   });
 }
 

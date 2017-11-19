@@ -82,7 +82,7 @@ app.post('/vote', function(request, response) {
 app.post('/create', function(request, response) {
     if(request.body) {
         updateRoom(request.body.name);
-        response.status(200).send(JSON.stringify({ room: res }));
+        response.status(200).send(JSON.stringify({ room: request.body }));
     } else {
         response.status(400).send(JSON.stringify({}));
     }
