@@ -1,3 +1,14 @@
 .vote-button {
     margin: 10px;
 }
+
+/*
+.single-attribute{
+    display: inline-block;
+    margin: 5%;
+}
+*/
+
+vote-container {
+    width: 100%;
+}

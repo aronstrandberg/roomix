@@ -7,8 +7,8 @@ class RadarGraph extends Component {
       <div className="radarstyle">
         <Radar
           width={500}
-          height={500}
-          padding={100}
+          height={300}
+          padding={30}
           domainMax={1}
           highlighted={null}
           onHover={(point) => {

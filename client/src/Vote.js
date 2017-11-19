@@ -37,8 +37,9 @@ class Vote extends Component {
 
   render() {
     return (
-        <div className="attribute-voting">
-            <div className="single-attribute">
+        <div className="container">
+        <div className="row">
+            <div className="col-md-4 col-sm-4">
                 <h3 data-tip="valence">Valence</h3>
                 <h3>
                     <a className="vote-button" data-tip="Increase" onClick={this.increaseValence}>
@@ -49,7 +50,7 @@ class Vote extends Component {
                     </a>
                 </h3>
             </div>
-            <div className="single-attribute">
+            <div className="col-md-4 col-sm-4">
                 <h3 data-tip="Danceability">Danceability</h3>
                 <h3>
                     <a className="vote-button" onClick={this.increaseDance}>
@@ -60,7 +61,7 @@ class Vote extends Component {
                     </a>
                 </h3>
             </div>
-            <div className="single-attribute">
+            <div className="col-md-4 col-sm-4">
                 <h3 data-tip="Instrumentalness">Instrumentalness</h3>
                 <h3>
                     <a className="vote-button" onClick={this.increaseInstr}>
@@ -72,6 +73,7 @@ class Vote extends Component {
                 </h3>
             </div>
           <ReactTooltip place="top" type="dark" effect="solid"/>
+        </div>
         </div>
     );
   }

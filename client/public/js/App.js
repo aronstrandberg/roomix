@@ -91,7 +91,26 @@ const App = {
       });
 
       return window.fetch(request).then((resp) => resp.json());
+    },
+    
+    recommendedTrack: (values) => {
+      let request = new Request("https://api.spotify.com/v1/recommendations?"+
+                        "limit=1"+
+                        "seed_tracks="+values.currentTrack+
+                        "&target_danceability="+values.danceability+
+                        "&target_instrumentalness="+values.instrumentalness+
+                        "&target_valence="+values.valence+
+                        "*&market=from_token", {
+        method: "GET",
+        headers: new Headers({
+          'Content-Type':  'application/json; charset=utf-8',
+          'Authorization': 'Bearer ' + App.getAccessToken()
+        })
+      });
+
+      return window.fetch(request).then((resp) => resp.json());
     }
+
 };
 
 window.App = App;
