@@ -45,6 +45,8 @@ function api(endpoint, options = {}) {
   console.log(request);
 
   return fetch(request).then((response) => {
+          console.log(response);
+
     return response.json();
   });
 }
