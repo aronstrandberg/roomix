@@ -4,15 +4,17 @@ import './index.css';
 import Authorize from './Authorize';
 import ConnectPlayer from './ConnectPlayer';
 import PlayerError from './PlayerError';
-
+import HomePage from './HomePage';
 // import registerServiceWorker from './registerServiceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 // registerServiceWorker();
+//if (window.App.isAccessToken() === false) {
+//    //ReactDOM.render(<Authorize />, document.getElementById('root'));
+//    ReactDOM.render(<HomePage state={null}/> , document.getElementById('root'));
+//}
 
-if (window.App.isAccessToken() === false) {
-  ReactDOM.render(<Authorize />, document.getElementById('root'));
-}
+ReactDOM.render(<HomePage state={null}/> , document.getElementById('root'));
 
 window.App.onSpotifyPlayerConnected = (data) => {
   ReactDOM.render(<ConnectPlayer />, document.getElementById('root'));

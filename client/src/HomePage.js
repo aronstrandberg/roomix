@@ -5,12 +5,15 @@ import RegularView from './RegularView'
 import RoomSelector from './RoomSelector'
 import PlayerSearch from './PlayerSearch'
 import socketIOClient from "socket.io-client";
+import Authorize from './Authorize'
 
 class HomePage extends Component {
   state = {
     room: {},
     currentSongUri: '',
-    endpoint: 'http://127.0.0.1:3001'
+    endpoint: 'http://127.0.0.1:3001',
+    rooms: [],
+    admin: false
   }
 
   componentDidMount = () => {
@@ -21,6 +24,10 @@ class HomePage extends Component {
             this.setRoom(room)
         }
     })
+    socket.on('rooms', (data) => {
+        var rooms = JSON.parse(data);
+        this.setState({rooms});
+    })
   }
 
   setRoom = (room) => {
@@ -29,6 +36,7 @@ class HomePage extends Component {
     })
   }
   onCreateRoom = (room) => {
+    console.log("ON CREATE ROOM")
     this.setState({
       room: room,
       admin: true
@@ -43,11 +51,12 @@ class HomePage extends Component {
           <h2>Current room: { this.state.room.name }</h2>
         }
         <AdminView state={this.props.state} admin={this.state.admin} room={this.state.room} />
-        { this.state.room.name && <RegularView admin={this.state.admin} room={this.state.room} onVote={this.setRoom} playerState={this.props.state} /> }
-        { !this.state.room.name && <RoomSelector setRoom={this.setRoom} onCreateRoom={this.onCreateRoom} />}
+        { this.state.room.name && <RegularView admin={this.state.admin} room={this.state.room} onVote={this.setRoom} /> }
+        { !this.state.room.name && <RoomSelector rooms={this.state.rooms} setRoom={this.setRoom} onCreateRoom={this.onCreateRoom} />}
       </div>
     );
   }
+
 }
 
 export default HomePage;

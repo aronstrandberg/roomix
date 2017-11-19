@@ -8,19 +8,20 @@ import { getRooms } from './services'
 
 class RoomSelector extends Component {
   state = {
-    rooms: []
+    rooms: this.props.rooms
   }
   componentDidMount() {
-    getRooms().then(result => {
-      this.setState({ rooms: result.rooms })
-    })
+    //getRooms().then(result => {
+    //  this.setState({ rooms: result.rooms })
+    //})
   }
   render() {
-    const { rooms } = this.state;
+  console.log(this.props.rooms);
+    //const { rooms } = this.state;
     return (
       <div className="room-selector">
         <h2>Join a room</h2>
-        { rooms.map(room => <Room key={room.name} room={room} setRoom={this.props.setRoom} />) }
+        { this.props.rooms.map(room => <Room key={room.name} room={room} setRoom={this.props.setRoom} />) }
         <RoomSelectorCreateRoom onCreateRoom={this.props.onCreateRoom} />
       </div>
     );

@@ -36,7 +36,13 @@ server.listen(port);
 
 io.on('connection', socket => {
     console.log('new socket created', socket.id);
-    //socket.emit('vote', {hej: 'world'});
+    rooms.find().toArray((err, res) => {
+        if(!err) {
+            socket.emit('rooms', JSON.stringify(res));
+            console.log(JSON.stringify({room: res}))
+        }
+    });
+    //socket.emit('rooms', );
 });
 
 io.on('vote', socket => {

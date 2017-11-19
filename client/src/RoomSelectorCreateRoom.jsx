@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import RoomSelectorCreateRoomButton from './RoomSelectorCreateRoomButton'
 import RoomSelectorCreateRoomInput from './RoomSelectorCreateRoomInput'
-
 import { createRoom, getRoom } from './services'
+import Authorize from './Authorize';
 
 class RoomSelectorCreateRoom extends Component {
   state = {
@@ -27,13 +27,19 @@ class RoomSelectorCreateRoom extends Component {
 
   submit = () => {
     createRoom(this.state.value).then(created => {
+      console.log("CREATED ROOM", created)
       getRoom(this.state.value).then(result => {
+        console.log("ON CREATE ROOM", result);
         this.props.onCreateRoom(result);
       })
     })
   }
 
+  authorized = () => {
+    return !!window.App.isAccessToken();
+  }
   render() {
+    const isAuthorized = this.authorized();
     return (
       <div className="room-selector-create-room">
         {
@@ -42,9 +48,16 @@ class RoomSelectorCreateRoom extends Component {
         }
         {
           this.state.creating && (
+            <div>
+            {!isAuthorized &&
+                <Authorize />
+            }
+            { isAuthorized &&
             <form onSubmit={this.onSubmit}>
               <RoomSelectorCreateRoomInput onChange={this.onChange} />
             </form>
+            }
+            </div>
           )
         }
       </div>
