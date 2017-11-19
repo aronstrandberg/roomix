@@ -61,14 +61,23 @@ const App = {
     *   App.playTrack("spotify:track:1j4kHkkpqZRBwE0A4CN4Yv")
     */
     playTrack: (uri) => {
-      let request = new Request("https://api.spotify.com/v1/me/player/play", {
+      console.log("PLAY TRACK URI")
+      const endpoint = "https://api.spotify.com/v1/me/player/play"
+      const options = {
         method: "PUT",
         headers: new Headers({
           'Content-Type':  'application/json; charset=utf-8',
           'Authorization': 'Bearer ' + App.getAccessToken()
         }),
-       body: JSON.stringify({ uris: [uri] })
-      });
+        body: {
+          uris: [uri]
+        }
+      }
+
+      console.log("PLAY TRACK REQUEST", options)
+      options.body = JSON.stringify(options.body);
+
+      const request = new Request(endpoint, options)
 
       return window.fetch(request).then((resp) => resp.json());
     },

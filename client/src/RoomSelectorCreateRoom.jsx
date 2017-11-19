@@ -7,12 +7,11 @@ import Authorize from './Authorize';
 
 class RoomSelectorCreateRoom extends Component {
   state = {
-    creating: false,
     value: ''
   }
 
   displayInputField = () => {
-    this.setState({ creating: true })
+    this.props.displayInputField()
   }
 
   onChange = (event) => {
@@ -43,11 +42,11 @@ class RoomSelectorCreateRoom extends Component {
     return (
       <div className="room-selector-create-room">
         {
-          !this.state.creating &&
+          !this.props.creating &&
           <RoomSelectorCreateRoomButton onClick={this.displayInputField} />
         }
         {
-          this.state.creating && (
+          this.props.creating && (
             <div>
             {!isAuthorized &&
                 <Authorize />

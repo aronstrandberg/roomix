@@ -26,8 +26,13 @@ class PlayerProgress extends Component {
     return this.props.state.duration - this.props.state.position
   }
   componentDidUpdate = () => {
-    if (this.timeLeft() > 10) {
+    // console.log(this.timeLeft())
+    if (this.timeLeft() < 10000) {
       this.props.onTrackNearingEnd()
+    }
+
+    if (this.timeLeft() < 1000) {
+      this.props.onTrackEnd()
     }
   }
   render () {
