@@ -42,12 +42,10 @@ function api(endpoint, options = {}) {
 
   const request = new Request(endpoint, options);
 
-  console.log(request);
 
   return fetch(request).then((response) => {
           console.log(response);
-
-    return response.json();
+    return response.json()
   });
 }
 

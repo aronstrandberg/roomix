@@ -5,7 +5,7 @@ class AdminView extends Component {
   render() {
     if (this.props.admin) {
       return (
-        <Player state={this.props.state} />
+        <Player state={this.props.state} /> 
       )
     } else {
       return null;
