@@ -36,8 +36,6 @@ class Player extends Component {
                 state={this.props.state}
                 showPosition={true}
                 showDuration={true}
-                onTrackNearingEnd={this.props.onTrackNearingEnd}
-                onTrackEnd={this.props.onTrackEnd}
               />
               <PlayerTrack track={track} />
               <PlayerArtists artists={track.artists} />

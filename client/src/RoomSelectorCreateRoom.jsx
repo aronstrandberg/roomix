@@ -10,10 +10,6 @@ class RoomSelectorCreateRoom extends Component {
     value: ''
   }
 
-  displayInputField = () => {
-    this.props.displayInputField()
-  }
-
   onChange = (event) => {
     const value = event.target.value;
     this.setState({ value: value });
@@ -26,9 +22,7 @@ class RoomSelectorCreateRoom extends Component {
 
   submit = () => {
     createRoom(this.state.value).then(created => {
-      console.log("CREATED ROOM", created)
       getRoom(this.state.value).then(result => {
-        console.log("ON CREATE ROOM", result);
         this.props.onCreateRoom(result);
       })
     })
@@ -43,7 +37,7 @@ class RoomSelectorCreateRoom extends Component {
       <div className="room-selector-create-room">
         {
           !this.props.creating &&
-          <RoomSelectorCreateRoomButton onClick={this.displayInputField} />
+          <RoomSelectorCreateRoomButton onClick={this.props.displayInputField} />
         }
         {
           this.props.creating && (

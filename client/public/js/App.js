@@ -79,7 +79,7 @@ const App = {
 
       const request = new Request(endpoint, options)
 
-      return window.fetch(request).then((resp) => resp.json());
+      return window.fetch(request).then((resp) => resp)
     },
 
    /**

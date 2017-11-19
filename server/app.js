@@ -6,11 +6,14 @@ const bodyParser = require('body-parser');
 const app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
+var cors = require('cors')
 
 app.use(bodyParser.json());
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+
+app.use(cors())
 
 app.use((req,res,next) => {
     console.log(req.method, req.url, req.body);

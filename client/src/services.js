@@ -28,7 +28,7 @@ function vote(name, vote) {
       valens: 0,
       instr: 0
     }, vote)
-    console.log(votes)
+
     return api(url, {
         method: 'POST',
         body: votes
@@ -42,16 +42,14 @@ function api(endpoint, options = {}) {
   options = Object.assign({
     headers: {
       'Content-Type': 'application/json'
-    }
+    },
+    mode: 'cors'
   }, options);
 
   const request = new Request(endpoint, options);
 
 
-  return fetch(request).then((response) => {
-          console.log(response);
-    return response.json()
-  });
+  return fetch(request).then((response) => response.json());
 }
 
 export default api;
